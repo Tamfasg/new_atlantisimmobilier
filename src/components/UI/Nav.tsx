@@ -153,7 +153,7 @@ const Nav = () => {
           className="
             flex h-18 w-full max-w-[24rem] items-center justify-between
             rounded-[1.8rem] border border-white/10
-            bg-emerald-luxury px-3 shadow-[0_20px_60px_rgba(0,0,0,0.45)]
+            bg-deep px-3 shadow-[0_20px_60px_rgba(0,0,0,0.45)]
             backdrop-blur-2xl
           "
         >
