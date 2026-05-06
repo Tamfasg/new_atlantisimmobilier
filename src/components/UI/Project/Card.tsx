@@ -1,5 +1,8 @@
 import { Project } from "@/types";
 import { useEffect, useRef } from "react";
+import { gsap, ScrollTrigger } from "gsap/all";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const ProjectCard = ({
   project,
@@ -39,7 +42,7 @@ export const ProjectCard = ({
           className="h-full w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
           style={{ backgroundImage: `url("${project.image}")` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/30 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-[#0a0a0a]/30 to-transparent" />
         <div className="absolute left-5 top-5 border border-[#c9a96e]/50 bg-[#0a0a0a]/70 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-[#c9a96e] backdrop-blur-sm">
           {project.status}
         </div>

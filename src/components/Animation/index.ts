@@ -3,31 +3,49 @@
 import { useScroll, useSpring, useTransform } from "motion/react";
 import { RefObject, useEffect } from "react";
 import { gsap } from "gsap";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
 import { refAnimationWrapper, yValueType } from "@/types";
 
 // Ensure plugins are registered only on the client side
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+  gsap.registerPlugin(ScrollTrigger);
 }
 
 export default function SmoothScroll() {
   useEffect(() => {
-    // Use gsap.context to safely manage and revert the instance!
-    const ctx = gsap.context(() => {
-      ScrollSmoother.create({
-        wrapper: "#smooth-wrapper",
-        content: "#smooth-content",
-        smooth: 1.8,
-        smoothTouch: 0.1,
-        effects: true,
-      });
+    const lenis = new Lenis({
+      duration: 1.25,
+      easing: (t) => Math.min(1, 1.001 - 2 ** (-10 * t)),
+      smoothWheel: true,
+      syncTouch: true,
+      syncTouchLerp: 0.08,
+      touchMultiplier: 1.15,
+      wheelMultiplier: 0.9,
+      anchors: true,
+      autoResize: true,
+    });
+
+    const updateScrollTrigger = () => {
+      ScrollTrigger.update();
+    };
+
+    const raf = (time: number) => {
+      lenis.raf(time * 1000);
+    };
+
+    lenis.on("scroll", updateScrollTrigger);
+    gsap.ticker.add(raf);
+    gsap.ticker.lagSmoothing(0);
+
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
     });
 
     return () => {
-      // This will instantly kill Smoother AND clear all its inline styles
-      ctx.revert();
+      lenis.off("scroll", updateScrollTrigger);
+      gsap.ticker.remove(raf);
+      lenis.destroy();
     };
   }, []);
 

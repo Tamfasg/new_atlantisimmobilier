@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 import SmoothScroll from "@/components/Animation";
 import Nav from "@/components/UI/Nav";
@@ -73,11 +74,12 @@ export default function RootLayout({
       lang="en"
       className={`${georgia.variable} ${calibri.variable} antialiased`}
     >
-      <body className=" bg-[#060606] text-white">        
-        <Nav />        
-          <div>
-            {children}
-          </div>
+      <body className=" bg-[#060606] text-white">
+        <SmoothScroll />
+        <Nav />
+        <div id="smooth-wrapper">
+          <div id="smooth-content">{children}</div>
+        </div>
       </body>
     </html>
   );
