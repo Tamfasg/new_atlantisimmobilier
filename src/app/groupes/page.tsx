@@ -298,7 +298,7 @@ function GroupeHero() {
       />
 
       <div className="relative z-10 grid w-full gap-12 md:grid-cols-[1.35fr_0.65fr] md:items-end">
-        <div>
+        <div className="w-full h-screen flex flex-col justify-end max-sm:justify-center max-sm:pt-30 pb-30">
           <M.p
             className="font-calibri mb-6 text-xs font-bold uppercase tracking-[0.45em] text-champagne"
             initial={{ y: 18, opacity: 0 }}
