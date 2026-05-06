@@ -1,26 +1,177 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --deep: #1e1e1e;
+  --mid: #4a4a4a;
+  --soft: #6a6a6a;
+  --champagne: #d6c7a3;
+  --warm: #c4b48e;
+  --pâle: #f0ede6;
+  --cream: #f7f5f0;
+
+  --deep: #1e1e1e;
+  --champagne: #d6c7a3;
+  --warm: #c4b48e;
+  --cream: #f0ede6;
+  --emerald-luxury: #0f3d2e;
+  --emerald-deep: #08251c;
+  --olive: #6f7352;
+  --stone-soft: #e6dfd2;
+  --gold-muted: #b99b5f;
+  --white-soft: #faf8f2;
+   --emerald-mid: #1a4a42;
+  --emerald-light: #2e7d6a;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-deep: var(--deep);
+  --color-mid: var(--mid);
+  --color-soft: var(--soft);
+  --color-champagne: var(--champagne);
+  --color-warm: var(--warm);
+  --color-pâle: var(--pâle);
+  --color-cream: var(--cream);
+
+  --color-emerald-luxury: var(--emerald-luxury);
+  --color-emerald-deep: var(--emerald-deep);
+  --color-olive: var(--olive);
+  --color-stone-soft: var(--stone-soft);
+  --color-gold-muted: var(--gold-muted);
+  --color-white-soft: var(--white-soft);
+   --color-emerald-mid: var(--emerald-mid);
+  --color-emerald-light: var(--emerald-light);
+  
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-georgia: var(--georgia);
+  --font-calibri: var(--calibri);
+
+  --breakpoint-laptop: 67.5rem;
+  --breakpoint-mobile: 25.125rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--deep);
+  color: var(--cream);
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+@utility wavy {
+  clip-path: shape(
+    from 0 0,
+    vline to calc(100% - 11.5vh),
+    curve to 15% calc(100% - 5.5vh) with 10% calc(100% - 6vh),
+    curve to 25% calc(100% - 2.5vh) with 20% calc(100% - 5vh),
+    curve to 35% calc(100% - 3vh) with 30% calc(100% - 0vh),
+    curve to 45% calc(100% - 5.5vh) with 40% calc(100% - 6vh),
+    curve to 55% calc(100% - 6.5vh) with 50% calc(100% - 5vh),
+    curve to 65% calc(100% - 6.5vh) with 60% calc(100% - 8vh),
+    curve to 75% calc(100% - 8vh) with 70% calc(100% - 5vh),
+    curve to 85% calc(100% - 5.5vh) with 80% calc(100% - 11vh),
+    curve to 100% calc(100% - 11.5vh) with 90% calc(100% - 0vh),
+    vline to 0,
+    hline to 0
+  );
+}
+
+@utility blob {
+  aspect-ratio: 1;
+  clip-path: shape(
+    from 11.48% 24.77%,
+    curve to 28.19% 13.42% with 16.91% 14.76%,
+    curve to 49.07% 10.96% with 39.48% 12.08%,
+    curve to 67.57% 14.08% with 58.67% 9.84%,
+    curve to 85.48% 24.98% with 76.46% 18.32%,
+    curve to 93.1% 42.74% with 94.5% 31.63%,
+    curve to 91.73% 65.45% with 91.71% 53.84%,
+    curve to 80.85% 81.27% with 91.75% 77.06%,
+    curve to 60.54% 87.18% with 69.96% 85.48%,
+    curve to 40.23% 90.6% with 51.13% 88.88%,
+    curve to 23.91% 82.73% with 29.33% 92.33%,
+    curve to 9.9% 65.24% with 18.49% 73.13%,
+    curve to 3.68% 46.06% with 1.31% 57.35%,
+    curve to 11.48% 24.77% with 6.04% 34.77%
+  );
+}
+
+
+@utility card-image-shape {
+  clip-path: shape(
+    from 44% 0%,
+
+    /* top edge */
+    hline to 92%,
+
+    /* top-right corner */
+    curve to 100% 8% with 97% 0% / 100% 3%,
+
+    /* right edge */
+    vline to 92%,
+
+    /* bottom-right corner */
+    curve to 92% 100% with 100% 97% / 97% 100%,
+
+    /* bottom edge */
+    hline to 8%,
+
+    /* bottom-left corner */
+    curve to 0% 92% with 3% 100% / 0% 97%,
+
+    /* left edge up */
+    vline to 16%,
+
+    /* small rounded shoulder before the cut */
+    curve to 8% 8% with 0% 11% / 2% 8%,
+
+    /* top-left flat part before reconnect */
+    hline to 34%,
+
+    /* diagonal / smooth reconnect to top */
+    line to 44% 0%,
+
+    close
+  );
+}
+
+@utility detail-card-shape {
+  clip-path: polygon(
+    14.5% 0%,
+    37% 0%,
+    49% 5.7%,
+    89% 5.7%,
+    100% 13%,
+    100% 53%,
+    95% 59%,
+    95% 76%,
+    100% 84%,
+    100% 92%,
+    89% 100%,
+    8% 100%,
+    0% 94%,
+    0% 12%,
+    5% 3%,
+    14.5% 0%
+  );
+}
+
+@utility detail-image-shape {
+  clip-path: polygon(
+    12% 0%,
+    38% 0%,
+    50% 6%,
+    92% 6%,
+    100% 15%,
+    100% 100%,
+    0% 100%,
+    0% 13%,
+    5% 3%,
+    12% 0%
+  );
+
+  border-radius: 2rem;
+}
+
