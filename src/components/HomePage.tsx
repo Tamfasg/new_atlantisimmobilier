@@ -66,7 +66,7 @@ const PROJECTS = [
     name: "Pessac Collection",
     location: "Casablanca",
     desc: "Au cœur vibrant de Casablanca, à l'angle du boulevard de la Résistance et de la rue Pessac, un programme mixte résidentiel et bureaux qui réinterprète l'esprit Art Déco de la ville.",
-    image: "/assets/projects/PESSAC/2.jpeg",
+    image: "/logos/pessac-collection.svg",
     tag: "En cours",
   },
   {
@@ -74,7 +74,7 @@ const PROJECTS = [
     name: "L'Olivier du Parc",
     location: "Had Soualem",
     desc: "À la porte de Casablanca, un ensemble résidentiel structuré de 675 logements, déployé en quatre tranches successives, pensé pour les familles.",
-    image: "/assets/projects/PESSAC/1.jpeg",
+    image: "/logos/olivier-du-parc.svg",
     tag: "Tranche 1",
   },
   {
@@ -82,7 +82,7 @@ const PROJECTS = [
     name: "Atlantis Signature",
     location: "Casablanca & littoral",
     desc: "Plusieurs programmes haut standing en cours, conçus comme des pièces uniques, à découvrir lors d'un rendez-vous personnalisé.",
-    image: "/assets/projects/PESSAC/3.jpeg",
+    image: "/logos/atlantis-signature.svg",
     tag: "Sur rendez-vous",
   },
 ];
@@ -601,13 +601,13 @@ const HomePage = () => {
                   className="project-card group relative flex h-full w-full cursor-pointer flex-col  overflow-hidden border border-white/[0.06] bg-[#0a0a0a] transition-all duration-500 hover:border-[#c9a96e]/30"
                   style={{ opacity: 0 }}
                 >
-                  <div className="relative h-64 overflow-hidden">
+                  <div className="relative h-64  overflow-hidden">
                     <div
-                      className="h-full w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                      className="w-auto bg-cover bg-center bg-no-repeat transition-transform duration-700 group-hover:scale-105 h-65 scale-100"
                       style={{ backgroundImage: `url("${p.image}")` }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/20 to-transparent" />
-                    <div className="absolute left-4 top-4 border border-[#c9a96e]/40 bg-black/60 px-3 py-1 font-calibri text-[9px] uppercase tracking-widest text-[#c9a96e] backdrop-blur-sm">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/5 to-transparent" />
+                    <div className="absolute left-4 top-4 border border-[#c9a96e]/40 bg-black/60 px-3 py-1 font-calibri text-sm uppercase tracking-widest text-[#c9a96e] backdrop-blur-sm">
                       {p.tag}
                     </div>
                   </div>
