@@ -305,7 +305,7 @@ const HomePage = () => {
           />
 
           <M.div
-            className="absolute left-0 top-0 h-[2px]"
+            className="absolute left-6 top-0 h-px"
             style={{
               background:
                 "linear-gradient(to right, transparent, #c9a96e, transparent)",
@@ -316,7 +316,7 @@ const HomePage = () => {
           />
 
           <M.div
-            className="absolute left-10 top-20 w-px"
+            className="absolute left-5 top-20 w-px"
             style={{ background: "rgba(201,169,110,0.2)" }}
             initial={{ height: 0 }}
             animate={heroLoaded ? { height: "90%" } : {}}
@@ -325,7 +325,7 @@ const HomePage = () => {
 
           <div
             ref={heroTextRef}
-            className="relative z-10 px-16 md:px-24 max-sm:px-8"
+            className="relative z-10 px-16 md:px-24 max-sm:px-10 w-full h-full flex flex-col justify-end max-sm:justify-center max-sm:pt-20"
           >
             <M.p
               className="mb-4 font-calibri text-[15px] uppercase tracking-[0.45em] text-[#c9a96e]"
