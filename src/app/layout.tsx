@@ -4,6 +4,7 @@ import "lenis/dist/lenis.css";
 import "./globals.css";
 import SmoothScroll from "@/components/Animation";
 import Nav from "@/components/UI/Nav";
+import { ViewTransitions } from "next-view-transitions";
 
 export const metadata: Metadata = {
   title: "Atlantis Immobilier",
@@ -75,10 +76,12 @@ export default function RootLayout({
       className={`${georgia.variable} ${calibri.variable} antialiased`}
     >
       <body className=" bg-[#060606] text-white">
-        <Nav />
+            <Nav />
         <SmoothScroll />
         <div id="smooth-wrapper">
-          <div id="smooth-content">{children}</div>
+          <div id="smooth-content">
+            {children}
+          </div>
         </div>
       </body>
     </html>

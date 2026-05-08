@@ -8,6 +8,7 @@ export const M = {
   header:  motion.header,
   nav:     motion.nav,
   section: motion.section,
+  form:   motion.form,
   main:    motion.main,
   a:       motion.a,
   button:  motion.button,
