@@ -27,3 +27,17 @@ export interface Project {
   image: string;
   index: number;
 }
+
+
+
+export type InvestirFormData = {
+  nom: string;
+  prenom: string;
+  telephone: string;
+  email: string;
+  profil: string;
+  projet: string;
+  marque: string;
+  message: string;
+  consent: boolean;
+};

@@ -30,7 +30,7 @@ export const PROJECTS: Project[] = [
     city: "Had Soualem",
     statut: "En cours",
     type: "Résidentiel",
-    image: "/assets/projects/OLIVIER/1.jpeg",
+    image: "/assets/projects/SIGNATURE/20.jpg",
     index: 2,
   },
   {
@@ -46,7 +46,7 @@ export const PROJECTS: Project[] = [
     city: "Littoral",
     statut: "Sur rendez-vous",
     type: "Résidentiel",
-    image: "/assets/projects/SIGNATURE/1.jpeg",
+    image: "/assets/projects/SIGNATURE/1.jpg",
     index: 3,
   },
 ];

@@ -465,12 +465,12 @@ const HomeContent = () => {
               <div
                 className="project-card group relative flex h-full w-full cursor-pointer flex-col overflow-hidden border border-white/6 bg-[#0a0a0a] transition-all duration-500 hover:border-[#c9a96e]/30"
               >
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative h-110 overflow-hidden">
                   <div
-                    className="w-auto bg-cover bg-center bg-no-repeat transition-transform duration-700 group-hover:scale-105 h-65 scale-100"
+                    className="bg-cover bg-center bg-no-repeat transition-transform duration-700 group-hover:scale-105 h-100 scale-110"
                     style={{ backgroundImage: `url("${p.image}")` }}
                   />
-                  <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-[#0a0a0a]/5 to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-[#0a0a0a]/2 to-transparent" />
                   <div className="absolute left-4 top-4 border border-[#c9a96e]/40 bg-black/60 px-3 py-1 font-calibri text-sm uppercase tracking-widest text-[#c9a96e] backdrop-blur-sm">
                     {p.tag}
                   </div>
