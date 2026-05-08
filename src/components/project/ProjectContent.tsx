@@ -118,7 +118,7 @@ const ProjectContent = () => {
         ref={heroRef}
         className="relative flex h-screen w-screen items-end max-sm:items-center overflow-hidden pb-24"
         style={{
-          backgroundImage: `url("/assets/projects/PESSAC/2.jpeg")`,
+          backgroundImage: `url("/assets/projects/PESSAC/3.jpeg")`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
