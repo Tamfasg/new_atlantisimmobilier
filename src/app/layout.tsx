@@ -75,8 +75,8 @@ export default function RootLayout({
       className={`${georgia.variable} ${calibri.variable} antialiased`}
     >
       <body className=" bg-[#060606] text-white">
-        <SmoothScroll />
         <Nav />
+        <SmoothScroll />
         <div id="smooth-wrapper">
           <div id="smooth-content">{children}</div>
         </div>
