@@ -1,7 +1,7 @@
 "use client";
 
 import { M } from "@/components/motion";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
@@ -26,33 +26,22 @@ import {
 } from "./InvestriHelper";
 import { FaqItem } from "./InvestirFAQ";
 import { GeoHex, GeoRings } from "./InvestirIcons";
-import { InvestirFormData } from "@/types";
-import { contactFields, contactSelects, contactStats, initialFormData } from "./InvestirForm";
+import InvestirForm from "./InvestirForm";
 
 gsap.registerPlugin(ScrollTrigger);
 
-
-
-
-const cx = (...classes: Array<string | false | null | undefined>) =>
+export const cx = (...classes: Array<string | false | null | undefined>) =>
   classes.filter(Boolean).join(" ");
 
 const sectionClass =
   "relative overflow-hidden px-[clamp(1.5rem,6vw,5rem)] py-[clamp(4rem,10vw,7rem)]";
 const twoColumnClass =
   "relative grid grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-[clamp(2.5rem,6vw,5rem)]";
-const labelClass =
-  "mb-2 block font-calibri text-[10px] font-bold uppercase tracking-[0.35em] text-[rgba(245,240,232,0.3)]";
-const inputClass =
-  "w-full box-border border border-[rgba(46,125,106,0.3)] bg-transparent px-[clamp(0.8rem,2vw,1rem)] py-[clamp(0.7rem,2vw,0.9rem)] font-calibri text-[clamp(13px,3vw,15px)] text-[#F5F0E8] outline-none transition-colors duration-200 placeholder:text-[rgba(245,240,232,0.25)] focus:border-[rgba(201,169,110,0.5)]";
 
 const InvestirContent = () => {
   const heroRef = useRef<HTMLElement>(null);
   const heroTextRef = useRef<HTMLDivElement>(null);
   const heroOverlayRef = useRef<HTMLDivElement>(null);
-
-  const [formData, setFormData] = useState<InvestirFormData>(initialFormData);
-  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     let ctx: ReturnType<typeof gsap.context> | undefined;
@@ -158,18 +147,6 @@ const InvestirContent = () => {
       ctx?.revert();
     };
   }, []);
-
-  const updateField = <K extends keyof InvestirFormData>(
-    key: K,
-    value: InvestirFormData[K],
-  ) => {
-    setFormData((data) => ({ ...data, [key]: value }));
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
 
   return (
     <main className="relative w-screen overflow-x-hidden bg-[#060F0D] font-calibri text-[#F5F0E8] selection:bg-[rgba(201,169,110,0.28)] selection:text-[#F5F0E8]">
@@ -306,10 +283,7 @@ const InvestirContent = () => {
 
       <GoldRule />
 
-      <section
-        id="residence"
-        className={cx(sectionClass, "bg-[#060F0D]")}
-      >
+      <section id="residence" className={cx(sectionClass, "bg-[#060F0D]")}>
         <div className="pointer-events-none absolute left-[clamp(-3rem,-8vw,-1.5rem)] top-12">
           <GeoRings size={240} color="#C9A96E" opacity={0.06} />
         </div>
@@ -324,8 +298,8 @@ const InvestirContent = () => {
               <Body className="mb-5">
                 Pour une résidence principale, le bon programme n’est pas
                 seulement celui qui plaît au moment de la visite. C’est celui
-                qui s’adapte à la vie qui vient : la famille qui s’agrandit,
-                les enfants qui grandissent, le quartier qui évolue.
+                qui s’adapte à la vie qui vient : la famille qui s’agrandit, les
+                enfants qui grandissent, le quartier qui évolue.
               </Body>
               <Body opacity={0.42} className="mb-[clamp(1.5rem,4vw,2rem)]">
                 Nous vous aidons à faire ce choix avec la bonne perspective.
@@ -363,10 +337,7 @@ const InvestirContent = () => {
 
       <EmeraldRule />
 
-      <section
-        id="investisseur"
-        className={cx(sectionClass, "bg-[#0B2B26]")}
-      >
+      <section id="investisseur" className={cx(sectionClass, "bg-[#0B2B26]")}>
         <div className="pointer-events-none absolute right-0 top-0 h-full w-1/2 bg-[linear-gradient(135deg,transparent_50%,rgba(46,125,106,0.06)_50%)]" />
 
         <div className="reveal-left relative mb-[clamp(2.5rem,6vw,4rem)] opacity-0">
@@ -652,128 +623,9 @@ const InvestirContent = () => {
               </Body>
             </div>
 
-            <div className="reveal-left flex flex-col gap-px bg-[rgba(46,125,106,0.15)] opacity-0">
-              {contactStats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="flex items-center gap-6 border-l-2 border-[rgba(201,169,110,0.3)] bg-[#0B2B26] px-[clamp(1.2rem,3vw,1.5rem)] py-[clamp(1rem,3vw,1.5rem)]"
-                >
-                  <span className="shrink-0 font-georgia text-[clamp(1.5rem,4vw,2rem)] italic text-[#C9A96E]">
-                    {stat.val}
-                  </span>
-                  <Body opacity={0.45}>{stat.label}</Body>
-                </div>
-              ))}
-            </div>
           </div>
-
           <div>
-            {submitted ? (
-              <div className="border border-[rgba(201,169,110,0.25)] bg-[rgba(201,169,110,0.04)] p-[clamp(2rem,5vw,3rem)] text-center">
-                <p className="mb-4 font-georgia text-[clamp(2rem,5vw,2.5rem)] italic text-[#C9A96E]">
-                  Merci.
-                </p>
-                <Body opacity={0.55}>
-                  Votre demande a bien été transmise. Un conseiller vous
-                  contactera sous 24 heures ouvrées.
-                </Body>
-              </div>
-            ) : (
-              <form
-                onSubmit={handleSubmit}
-                className="reveal-right opacity-0"
-              >
-                <div className="mb-[clamp(0.8rem,2vw,1rem)] grid grid-cols-[repeat(auto-fit,minmax(min(100%,160px),1fr))] gap-[clamp(0.8rem,2vw,1rem)]">
-                  {contactFields.map((field) => (
-                    <div key={field.key}>
-                      <label className={labelClass}>{field.label}</label>
-                      <input
-                        type={field.type}
-                        required={field.required}
-                        placeholder={field.label}
-                        value={formData[field.key]}
-                        onChange={(e) =>
-                          updateField(field.key, e.target.value)
-                        }
-                        className={inputClass}
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mb-[clamp(0.8rem,2vw,1rem)] grid grid-cols-[repeat(auto-fit,minmax(min(100%,160px),1fr))] gap-[clamp(0.8rem,2vw,1rem)]">
-                  {contactSelects.map((select) => (
-                    <div key={select.key}>
-                      <label className={labelClass}>{select.label}</label>
-                      <select
-                        value={formData[select.key]}
-                        onChange={(e) =>
-                          updateField(select.key, e.target.value)
-                        }
-                        className={cx(
-                          inputClass,
-                          "bg-[#0B2B26] text-[rgba(245,240,232,0.6)]",
-                        )}
-                      >
-                        <option
-                          value=""
-                          className="bg-[#0B2B26] text-[#F5F0E8]"
-                        >
-                          Sélectionner
-                        </option>
-                        {select.opts.map((option) => (
-                          <option
-                            key={option}
-                            value={option}
-                            className="bg-[#0B2B26] text-[#F5F0E8]"
-                          >
-                            {option}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mb-[clamp(0.8rem,2vw,1rem)]">
-                  <label className={labelClass}>Message libre</label>
-                  <textarea
-                    rows={4}
-                    placeholder="Votre message…"
-                    value={formData.message}
-                    onChange={(e) => updateField("message", e.target.value)}
-                    className={cx(inputClass, "resize-none")}
-                  />
-                </div>
-
-                <div className="mb-[clamp(1.2rem,3vw,1.5rem)] flex items-start gap-3.5">
-                  <input
-                    type="checkbox"
-                    id="consent"
-                    required
-                    checked={formData.consent}
-                    onChange={(e) => updateField("consent", e.target.checked)}
-                    className="mt-[3px] h-4 w-4 shrink-0 accent-[#C9A96E]"
-                  />
-                  <label
-                    htmlFor="consent"
-                    className="cursor-pointer font-calibri text-[clamp(11px,2.5vw,12px)] leading-[1.6] text-[rgba(245,240,232,0.38)]"
-                  >
-                    J’accepte que mes données soient utilisées pour traiter ma
-                    demande, conformément à la loi 09-08 sur la protection des
-                    données personnelles.
-                  </label>
-                </div>
-
-                <Btn label="Envoyer ma demande" type="submit" full />
-
-                <p className="mt-4 font-calibri text-[11px] leading-[1.7] text-[rgba(245,240,232,0.22)]">
-                  Vos données sont traitées dans le strict respect de la loi
-                  09-08. Elles sont utilisées uniquement pour répondre à votre
-                  demande et ne sont en aucun cas cédées à des tiers.
-                </p>
-              </form>
-            )}
+            <InvestirForm />
           </div>
         </div>
       </section>

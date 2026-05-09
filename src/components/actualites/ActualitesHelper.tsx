@@ -1,7 +1,7 @@
 
 import type { ReactNode } from "react";
 
-const cx = (...classes: Array<string | false | null | undefined>) =>
+export const cx = (...classes: Array<string | false | null | undefined>) =>
   classes.filter(Boolean).join(" ");
 
 const bodyTone = {

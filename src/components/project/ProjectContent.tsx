@@ -1,7 +1,7 @@
 "use client";
 
 import { M } from "@/components/motion";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger } from "gsap/all";
 import { Project } from "@/types";
 import {
@@ -12,9 +12,9 @@ import {
   UPCOMING_BENEFITS,
 } from "@/app/data";
 import ProjectCard from "@/components/project/ProjectCard";
-import ProjectForm, { type ProjectFormData } from "@/components/project/ProjectForm";
+import ProjectForm from "@/components/project/ProjectForm";
 import FilterButton, { type ProjectFilter } from "@/components/project/FilterButton";
-import { SectionTag, DisplayH2 } from "@/components/UI/SectionHeader";
+import { SectionTag } from "@/components/UI/SectionHeader";
 import GoldLine from "@/components/UI/GoldLine";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -27,15 +27,6 @@ const ProjectContent = () => {
     type: "Toutes",
   });
 
-  const [formData, setFormData] = useState<ProjectFormData>({
-    nom: "",
-    email: "",
-    telephone: "",
-    brand: "",
-    ville: "",
-    type: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
 
   const heroRef = useRef<HTMLElement>(null);
   const heroTitleRef = useRef<HTMLDivElement>(null);
@@ -46,7 +37,6 @@ const ProjectContent = () => {
   const olivierRef = useRef<HTMLElement>(null);
   const signatureRef = useRef<HTMLElement>(null);
   const upcomingRef = useRef<HTMLElement>(null);
-  const formRef = useRef<HTMLElement>(null);
   const ctaRef = useRef<HTMLElement>(null);
 
   const filtered = PROJECTS.filter((p) => {
@@ -78,7 +68,6 @@ const ProjectContent = () => {
         olivierRef,
         signatureRef,
         upcomingRef,
-        formRef,
         ctaRef,
       ];
 
@@ -102,11 +91,6 @@ const ProjectContent = () => {
 
     return () => ctx.revert();
   }, []);
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
 
   const scrollToProject = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -471,7 +455,7 @@ const ProjectContent = () => {
         </div>
       </section>
 
-      <section ref={formRef} className="border-t border-white/5 bg-[#0a0a0a] px-10 py-28 md:px-20">
+      <section className="border-t border-white/5 bg-[#0a0a0a] px-10 py-28 md:px-20">
         <div className="mx-auto max-w-2xl">
           <SectionTag>Liste d'attente prioritaire</SectionTag>
           <h2
@@ -481,7 +465,7 @@ const ProjectContent = () => {
             Recevoir les annonces de lancement
           </h2>
 
-          <ProjectForm formData={formData} setFormData={setFormData} submitted={submitted} handleSubmit={handleSubmit} />
+          <ProjectForm  />
         </div>
       </section>
 

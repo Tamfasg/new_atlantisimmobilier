@@ -8,6 +8,7 @@ import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 import { SectionTag, DisplayH2 } from "@/components/UI/SectionHeader";
 import { ENGAGEMENTS, BRANDS, PROJECTS, CONFIANCE } from "@/app/data/home";
+import HomdeContactForm from "./HomeForm";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -603,90 +604,7 @@ const HomeContent = () => {
           </div>
 
           <div>
-            {submitted ? (
-              <div className="flex h-full items-center justify-center border border-[#c9a96e]/25 bg-[#c9a96e]/3 p-12 text-center">
-                <div>
-                  <div className="mb-4 text-5xl italic text-[#c9a96e]" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-                    Merci.
-                  </div>
-                  <p className="font-calibri text-normal uppercase tracking-widest text-white/40">
-                    Un conseiller vous contactera sous 24h ouvrées.
-                  </p>
-                </div>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {CONTACT_FIELDS.map((field) => (
-                    <div key={field.key}>
-                      <label className="mb-2 block font-calibri text-[9px] uppercase tracking-widest text-white/25">
-                        {field.label}
-                      </label>
-                      <input
-                        type={field.type}
-                        required={field.required}
-                        value={formData[field.key]}
-                        onChange={(e) => updateFormField(field.key, e.target.value)}
-                        placeholder={field.label}
-                        className="w-full border border-white/8 bg-transparent px-4 py-3 text-normal text-white outline-none transition-colors duration-200 placeholder:text-white/15 focus:border-[#c9a96e]/40"
-                      />
-                    </div>
-                  ))}
-
-                  <div>
-                    <label className="mb-2 block font-calibri text-[9px] uppercase tracking-widest text-white/25">
-                      Projet
-                    </label>
-                    <select
-                      value={formData.projet}
-                      onChange={(e) => updateFormField("projet", e.target.value)}
-                      className="w-full border border-white/8 bg-[#080808] px-4 py-3 text-normal text-white/60 outline-none focus:border-[#c9a96e]/40"
-                    >
-                      <option value="">Sélectionner</option>
-                      <option>Résidence principale</option>
-                      <option>Investissement</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="mb-2 block font-calibri text-[9px] uppercase tracking-widest text-white/25">
-                    Marque ou ville d'intérêt
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.interet}
-                    onChange={(e) => updateFormField("interet", e.target.value)}
-                    placeholder="Ex: Pessac Collection, Casablanca…"
-                    className="w-full border border-white/8 bg-transparent px-4 py-3 text-normal text-white outline-none placeholder:text-white/15 focus:border-[#c9a96e]/40 transition-colors duration-200"
-                  />
-                </div>
-
-                <div>
-                  <label className="mb-2 block font-calibri text-[9px] uppercase tracking-widest text-white/25">
-                    Message libre
-                  </label>
-                  <textarea
-                    rows={4}
-                    value={formData.message}
-                    onChange={(e) => updateFormField("message", e.target.value)}
-                    placeholder="Votre message…"
-                    className="w-full resize-none border border-white/8 bg-transparent px-4 py-3 text-normal text-white outline-none placeholder:text-white/15 focus:border-[#c9a96e]/40 transition-colors duration-200"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full border border-[#c9a96e]/60 bg-[#c9a96e]/5 py-4 font-calibri text-normal uppercase tracking-widest text-[#c9a96e] transition-all duration-400 hover:bg-[#c9a96e]/15"
-                >
-                  Être rappelé
-                </button>
-
-                <p className="pt-1 text-center font-calibri text-[8px] uppercase tracking-wider text-white/20">
-                  Vos données sont traitées dans le strict respect de la loi 09-08 relative à la protection des données personnelles.
-                </p>
-              </form>
-            )}
+            <HomdeContactForm />
           </div>
         </div>
       </section>

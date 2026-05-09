@@ -1,29 +1,33 @@
 "use client";
 
 import { M } from "@/components/motion";
-import { type FormEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import { ARTICLES, CATEGORIES, CONSEILS, PROJECT_UPDATES } from "@/app/data/actualites";
+import {
+  ARTICLES,
+  CATEGORIES,
+  CONSEILS,
+  PROJECT_UPDATES,
+} from "@/app/data/actualites";
 import { ArticleCard } from "./ActualitesCard";
-import { Body, EmeraldRule, GeoGrid, GoldRule, H2, Tag } from "./ActualitesHelper";
+import {
+  Body,
+  cx,
+  EmeraldRule,
+  GeoGrid,
+  GoldRule,
+  H2,
+  Tag,
+} from "./ActualitesHelper";
 import { Btn } from "./ActualiteBtn";
+import ActualiteForm from "./ActualiteForm";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const cx = (...classes: Array<string | false | null | undefined>) =>
-  classes.filter(Boolean).join(" ");
-
-const inputClassName =
-  "box-border w-full border border-emerald-light/30 bg-transparent px-[clamp(0.8rem,2vw,1rem)] py-[clamp(0.65rem,2vw,0.85rem)] font-calibri text-[clamp(13px,3vw,15px)] text-cream outline-none transition-colors duration-200 placeholder:text-cream/25 focus:border-champagne/50";
-
-const labelClassName =
-  "mb-[7px] block font-calibri text-[10px] font-bold uppercase tracking-[0.35em] text-cream/30";
-
 const projectAccent = (accent: string) => {
   const normalized = accent.toLowerCase();
-
   if (normalized === "#2e7d6a") {
     return {
       text: "text-emerald-light",
@@ -53,8 +57,6 @@ const ActualitesPage = () => {
   const heroOverlayRef = useRef<HTMLDivElement>(null);
 
   const [activeCategory, setActiveCategory] = useState("Tous");
-  const [newsForm, setNewsForm] = useState({ nom: "", email: "", telephone: "", sujet: "" });
-  const [newsSubmitted, setNewsSubmitted] = useState(false);
 
   const filteredArticles =
     activeCategory === "Tous"
@@ -62,7 +64,8 @@ const ActualitesPage = () => {
       : ARTICLES.filter(
           (article) =>
             article.category === activeCategory ||
-            article.category.replace(/s$/, "") === activeCategory.replace(/s$/, ""),
+            article.category.replace(/s$/, "") ===
+              activeCategory.replace(/s$/, ""),
         );
 
   useEffect(() => {
@@ -93,7 +96,11 @@ const ActualitesPage = () => {
               x: 0,
               duration: 0.95,
               ease: "power3.out",
-              scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none none" },
+              scrollTrigger: {
+                trigger: el,
+                start: "top 88%",
+                toggleActions: "play none none none",
+              },
             },
           );
         });
@@ -107,7 +114,11 @@ const ActualitesPage = () => {
               x: 0,
               duration: 0.95,
               ease: "power3.out",
-              scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none none" },
+              scrollTrigger: {
+                trigger: el,
+                start: "top 88%",
+                toggleActions: "play none none none",
+              },
             },
           );
         });
@@ -125,7 +136,11 @@ const ActualitesPage = () => {
               duration: 0.85,
               ease: "power3.out",
               delay,
-              scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none none" },
+              scrollTrigger: {
+                trigger: el,
+                start: "top 90%",
+                toggleActions: "play none none none",
+              },
             },
           );
         });
@@ -139,7 +154,11 @@ const ActualitesPage = () => {
               y: 0,
               duration: 1,
               ease: "power3.out",
-              scrollTrigger: { trigger: el, start: "top 86%", toggleActions: "play none none none" },
+              scrollTrigger: {
+                trigger: el,
+                start: "top 86%",
+                toggleActions: "play none none none",
+              },
             },
           );
         });
@@ -153,11 +172,6 @@ const ActualitesPage = () => {
       ctx?.revert();
     };
   }, []);
-
-  const handleNewsSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setNewsSubmitted(true);
-  };
 
   return (
     <main className="relative w-screen overflow-x-hidden bg-emerald-deep font-calibri text-cream selection:bg-champagne/30 selection:text-cream">
@@ -187,7 +201,11 @@ const ActualitesPage = () => {
         />
 
         <div className="pointer-events-none absolute right-[clamp(1.5rem,5vw,3rem)] top-[clamp(1.5rem,5vw,3rem)]">
-          <M.div initial={{ opacity: 0, rotate: -12 }} animate={{ opacity: 1, rotate: 0 }} transition={{ duration: 1.2, delay: 1 }}>
+          <M.div
+            initial={{ opacity: 0, rotate: -12 }}
+            animate={{ opacity: 1, rotate: 0 }}
+            transition={{ duration: 1.2, delay: 1 }}
+          >
             <GeoGrid className="size-35 text-champagne opacity-[0.12]" />
           </M.div>
         </div>
@@ -196,7 +214,10 @@ const ActualitesPage = () => {
           A
         </div>
 
-        <div ref={heroTextRef} className="relative z-10 w-full px-[clamp(1.5rem,6vw,5rem)]">
+        <div
+          ref={heroTextRef}
+          className="relative z-10 w-full px-[clamp(1.5rem,6vw,5rem)]"
+        >
           <M.p
             className="mb-[clamp(0.8rem,2vw,1.2rem)] font-calibri text-[clamp(10px,3vw,13px)] font-bold uppercase tracking-[0.42em] text-champagne"
             initial={{ y: 20, opacity: 0 }}
@@ -224,7 +245,9 @@ const ActualitesPage = () => {
             transition={{ duration: 0.9, delay: 0.95 }}
           >
             <Body opacity={0.5}>
-              Nouveaux programmes, avancement des chantiers, conseils d&apos;acquisition, tendances du marché et informations utiles : retrouvez ici les actualités d&apos;Atlantis Immobilier.
+              Nouveaux programmes, avancement des chantiers, conseils
+              d&apos;acquisition, tendances du marché et informations utiles :
+              retrouvez ici les actualités d&apos;Atlantis Immobilier.
             </Body>
           </M.div>
         </div>
@@ -235,7 +258,9 @@ const ActualitesPage = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.8 }}
         >
-          <span className="font-calibri text-[9px] uppercase tracking-[0.3em] text-cream/[0.22]">Défiler</span>
+          <span className="font-calibri text-[9px] uppercase tracking-[0.3em] text-cream/[0.22]">
+            Défiler
+          </span>
           <M.div
             className="h-9 w-px bg-[linear-gradient(to_bottom,var(--champagne),transparent)]"
             animate={{ scaleY: [1, 0.3, 1] }}
@@ -282,15 +307,20 @@ const ActualitesPage = () => {
           <Tag>Dernières actualités</Tag>
           <H2 className="mb-3">Articles récents.</H2>
           <Body opacity={0.42}>
-            Un espace pour mieux comprendre nos projets, suivre leur évolution et préparer votre acquisition avec plus de clarté.
+            Un espace pour mieux comprendre nos projets, suivre leur évolution
+            et préparer votre acquisition avec plus de clarté.
           </Body>
         </div>
 
         {filteredArticles.length === 0 ? (
           <div className="border border-emerald-light/20 px-8 py-[clamp(4rem,10vw,7rem)] text-center">
-            <p className="mb-4 font-georgia text-[clamp(1.5rem,4vw,2.5rem)] italic text-cream">Les actualités arrivent bientôt.</p>
+            <p className="mb-4 font-georgia text-[clamp(1.5rem,4vw,2.5rem)] italic text-cream">
+              Les actualités arrivent bientôt.
+            </p>
             <Body opacity={0.45} className="mx-auto mb-8 max-w-[500px]">
-              Nos équipes préparent les premières publications : annonces de lancement, conseils d&apos;achat, suivi de projets et informations dédiées aux investisseurs.
+              Nos équipes préparent les premières publications : annonces de
+              lancement, conseils d&apos;achat, suivi de projets et informations
+              dédiées aux investisseurs.
             </Body>
             <Btn label="Découvrir nos projets" href="/projets" />
           </div>
@@ -298,7 +328,9 @@ const ActualitesPage = () => {
           <div
             className={cx(
               "grid grid-cols-[repeat(auto-fill,minmax(min(100%,280px),1fr))] gap-[clamp(1rem,2.5vw,1.5rem)]",
-              filteredArticles.length > 1 ? "bg-emerald-light/[0.12]" : "bg-transparent",
+              filteredArticles.length > 1
+                ? "bg-emerald-light/[0.12]"
+                : "bg-transparent",
             )}
           >
             {filteredArticles.map((article, i) => (
@@ -317,23 +349,40 @@ const ActualitesPage = () => {
           <Tag>Conseils & expertise</Tag>
           <H2 className="mb-3">Mieux acheter, mieux investir.</H2>
           <Body opacity={0.42} className="max-w-[min(640px,90vw)]">
-            Atlantis Immobilier accompagne les acquéreurs dans leurs décisions : comprendre un emplacement, lire une grille de prix, évaluer une typologie, préparer son financement.
+            Atlantis Immobilier accompagne les acquéreurs dans leurs décisions :
+            comprendre un emplacement, lire une grille de prix, évaluer une
+            typologie, préparer son financement.
           </Body>
         </div>
 
         <div className="relative grid grid-cols-[repeat(auto-fit,minmax(min(100%,240px),1fr))] gap-px bg-emerald-light/20">
           {CONSEILS.map((c, i) => (
-            <Link key={c.title} href={c.href} className="group text-inherit no-underline">
+            <Link
+              key={c.title}
+              href={c.href}
+              className="group text-inherit no-underline"
+            >
               <div
                 className="stagger-item relative cursor-pointer border-t-2 border-transparent bg-emerald-luxury px-[clamp(1.5rem,4vw,2.5rem)] py-[clamp(2rem,5vw,3rem)] opacity-0 transition-colors duration-[400ms] group-hover:border-t-champagne group-hover:bg-emerald-mid"
                 data-dir={i % 2 === 0 ? "left" : "right"}
                 data-delay={`${i * 0.12}`}
               >
-                <p className="mb-4 text-[clamp(1.6rem,4vw,2rem)] leading-none text-champagne">{c.icon}</p>
-                <h3 className="mb-[0.85rem] font-georgia text-[clamp(1.1rem,3vw,1.3rem)] italic leading-[1.3] text-cream">{c.title}</h3>
-                <Body opacity={0.48} className="mb-6 text-[clamp(13px,3vw,15px)]">{c.desc}</Body>
+                <p className="mb-4 text-[clamp(1.6rem,4vw,2rem)] leading-none text-champagne">
+                  {c.icon}
+                </p>
+                <h3 className="mb-[0.85rem] font-georgia text-[clamp(1.1rem,3vw,1.3rem)] italic leading-[1.3] text-cream">
+                  {c.title}
+                </h3>
+                <Body
+                  opacity={0.48}
+                  className="mb-6 text-[clamp(13px,3vw,15px)]"
+                >
+                  {c.desc}
+                </Body>
                 <div className="flex items-center gap-[0.6rem]">
-                  <span className="font-calibri text-[10px] font-bold uppercase tracking-[0.3em] text-champagne">En savoir plus</span>
+                  <span className="font-calibri text-[10px] font-bold uppercase tracking-[0.3em] text-champagne">
+                    En savoir plus
+                  </span>
                   <div className="h-px w-5 bg-champagne opacity-60" />
                 </div>
               </div>
@@ -349,7 +398,9 @@ const ActualitesPage = () => {
           <Tag>Suivi des projets</Tag>
           <H2 className="mb-3">Avancement des programmes.</H2>
           <Body opacity={0.42} className="max-w-[min(640px,90vw)]">
-            Un espace dédié aux informations de chantier, aux étapes de commercialisation, aux nouvelles tranches et aux annonces importantes liées à nos programmes.
+            Un espace dédié aux informations de chantier, aux étapes de
+            commercialisation, aux nouvelles tranches et aux annonces
+            importantes liées à nos programmes.
           </Body>
         </div>
 
@@ -358,20 +409,48 @@ const ActualitesPage = () => {
             const accent = projectAccent(proj.accent);
 
             return (
-              <Link key={proj.name} href={proj.href} className="group text-inherit no-underline">
+              <Link
+                key={proj.name}
+                href={proj.href}
+                className="group text-inherit no-underline"
+              >
                 <div
                   className="stagger-item grid cursor-pointer grid-cols-[clamp(50px,10vw,90px)_1fr_auto] items-center gap-[clamp(1rem,3vw,2rem)] bg-emerald-deep p-[clamp(1.5rem,4vw,2.2rem)] opacity-0 transition-colors duration-[350ms] group-hover:bg-emerald-luxury"
                   data-dir={i % 2 === 0 ? "left" : "right"}
                   data-delay={`${i * 0.12}`}
                 >
-                  <span className={cx("font-georgia text-[clamp(1.5rem,4vw,2.2rem)] italic opacity-60", accent.text)}>{proj.roman}</span>
+                  <span
+                    className={cx(
+                      "font-georgia text-[clamp(1.5rem,4vw,2.2rem)] italic opacity-60",
+                      accent.text,
+                    )}
+                  >
+                    {proj.roman}
+                  </span>
                   <div>
-                    <h3 className="mb-[0.4rem] font-georgia text-[clamp(1.1rem,3vw,1.4rem)] italic text-cream">{proj.name}</h3>
-                    <Body opacity={0.45} className="text-[clamp(13px,3vw,15px)]">{proj.desc}</Body>
+                    <h3 className="mb-[0.4rem] font-georgia text-[clamp(1.1rem,3vw,1.4rem)] italic text-cream">
+                      {proj.name}
+                    </h3>
+                    <Body
+                      opacity={0.45}
+                      className="text-[clamp(13px,3vw,15px)]"
+                    >
+                      {proj.desc}
+                    </Body>
                   </div>
                   <div className="flex shrink-0 items-center gap-2">
-                    <div className={cx("h-px w-[clamp(16px,4vw,28px)] opacity-[0.55]", accent.bg)} />
-                    <div className={cx("size-1.5 rotate-45 border-r border-t opacity-[0.55]", accent.border)} />
+                    <div
+                      className={cx(
+                        "h-px w-[clamp(16px,4vw,28px)] opacity-[0.55]",
+                        accent.bg,
+                      )}
+                    />
+                    <div
+                      className={cx(
+                        "size-1.5 rotate-45 border-r border-t opacity-[0.55]",
+                        accent.border,
+                      )}
+                    />
                   </div>
                 </div>
               </Link>
@@ -387,16 +466,29 @@ const ActualitesPage = () => {
           <div>
             <div className="reveal-left opacity-0">
               <Tag>Restez informé</Tag>
-              <H2 className="mb-[clamp(1rem,3vw,1.5rem)]">Recevoir les actualités Atlantis.</H2>
+              <H2 className="mb-[clamp(1rem,3vw,1.5rem)]">
+                Recevoir les actualités Atlantis.
+              </H2>
               <Body opacity={0.5} className="mb-[clamp(1.5rem,4vw,2.5rem)]">
-                Inscrivez-vous pour recevoir nos annonces de lancement, nos conseils d&apos;investissement et les informations importantes sur nos programmes.
+                Inscrivez-vous pour recevoir nos annonces de lancement, nos
+                conseils d&apos;investissement et les informations importantes
+                sur nos programmes.
               </Body>
 
               <div className="flex flex-col gap-[0.85rem]">
-                {["Annonces de lancement en avant-première", "Conseils d'investissement exclusifs", "Suivi d'avancement des chantiers", "Aucun spam, désinscription en un clic"].map((b) => (
+                {[
+                  "Annonces de lancement en avant-première",
+                  "Conseils d'investissement exclusifs",
+                  "Suivi d'avancement des chantiers",
+                  "Aucun spam, désinscription en un clic",
+                ].map((b) => (
                   <div key={b} className="flex items-start gap-3">
-                    <span className="mt-[0.4rem] text-[0.6rem] text-champagne">◆</span>
-                    <Body opacity={0.5} className="text-[clamp(13px,3vw,15px)]">{b}</Body>
+                    <span className="mt-[0.4rem] text-[0.6rem] text-champagne">
+                      ◆
+                    </span>
+                    <Body opacity={0.5} className="text-[clamp(13px,3vw,15px)]">
+                      {b}
+                    </Body>
                   </div>
                 ))}
               </div>
@@ -404,55 +496,7 @@ const ActualitesPage = () => {
           </div>
 
           <div>
-            {newsSubmitted ? (
-              <div className="reveal-right border border-champagne/25 bg-champagne/[0.04] p-[clamp(2rem,5vw,3rem)] text-center opacity-0">
-                <p className="mb-4 font-georgia text-[clamp(2rem,5vw,2.5rem)] italic text-champagne">Merci.</p>
-                <Body opacity={0.55}>Votre inscription a bien été prise en compte. Vous recevrez nos prochaines actualités en avant-première.</Body>
-              </div>
-            ) : (
-              <form onSubmit={handleNewsSubmit} className="reveal-right opacity-0">
-                <div className="mb-[clamp(0.8rem,2vw,1rem)] grid grid-cols-[repeat(auto-fit,minmax(min(100%,160px),1fr))] gap-[clamp(0.8rem,2vw,1rem)]">
-                  {[
-                    { key: "nom", label: "Nom", type: "text" },
-                    { key: "email", label: "E-mail", type: "email" },
-                    { key: "telephone", label: "Téléphone", type: "tel" },
-                  ].map((f) => (
-                    <div key={f.key}>
-                      <label className={labelClassName}>{f.label}</label>
-                      <input
-                        type={f.type}
-                        placeholder={f.label}
-                        required={f.key !== "telephone"}
-                        value={newsForm[f.key as keyof typeof newsForm]}
-                        onChange={(e) => setNewsForm((d) => ({ ...d, [f.key]: e.target.value }))}
-                        className={inputClassName}
-                      />
-                    </div>
-                  ))}
-                  <div>
-                    <label className={labelClassName}>Sujet d&apos;intérêt</label>
-                    <select
-                      value={newsForm.sujet}
-                      onChange={(e) => setNewsForm((d) => ({ ...d, sujet: e.target.value }))}
-                      className={cx(inputClassName, "text-cream/60")}
-                    >
-                      <option value="" className="bg-emerald-luxury text-cream">Sélectionner</option>
-                      {["Projets", "Investissement", "MRE", "Tous"].map((o) => (
-                        <option key={o} value={o} className="bg-emerald-luxury text-cream">
-                          {o}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                <Btn label="S'inscrire aux actualités" type="submit" full />
-
-                <p className="mt-4 font-calibri text-[11px] leading-[1.65] text-cream/[0.22]">
-                  Vos données sont traitées dans le strict respect de la loi 09-08 relative à la protection des données personnelles.
-                </p>
-              </form>
-            )}
+            <ActualiteForm />
           </div>
         </div>
       </section>
@@ -468,9 +512,15 @@ const ActualitesPage = () => {
 
         <div className="reveal-up relative opacity-0">
           <Tag>Parlons de votre projet</Tag>
-          <H2 className="mx-auto mb-[clamp(0.8rem,2.5vw,1.2rem)] max-w-[min(700px,90vw)]">Une actualité vous intéresse ?</H2>
-          <Body opacity={0.45} className="mx-auto mb-[clamp(2rem,5vw,3rem)] max-w-[min(520px,88vw)]">
-            Un conseiller Atlantis peut vous rappeler pour vous présenter un programme, vous envoyer une brochure ou répondre à vos questions.
+          <H2 className="mx-auto mb-[clamp(0.8rem,2.5vw,1.2rem)] max-w-[min(700px,90vw)]">
+            Une actualité vous intéresse ?
+          </H2>
+          <Body
+            opacity={0.45}
+            className="mx-auto mb-[clamp(2rem,5vw,3rem)] max-w-[min(520px,88vw)]"
+          >
+            Un conseiller Atlantis peut vous rappeler pour vous présenter un
+            programme, vous envoyer une brochure ou répondre à vos questions.
           </Body>
           <Btn label="Être rappelé" href="/investir#contact" />
         </div>
@@ -479,9 +529,13 @@ const ActualitesPage = () => {
       </section>
 
       <div className="flex flex-wrap items-center justify-between gap-4 border-t border-emerald-light/20 px-[clamp(1.5rem,6vw,5rem)] py-[clamp(1rem,3vw,1.5rem)]">
-        <span className="font-calibri text-[9px] uppercase tracking-[0.3em] text-cream/20">© {new Date().getFullYear()} Atlantis Immobilier</span>
+        <span className="font-calibri text-[9px] uppercase tracking-[0.3em] text-cream/20">
+          © {new Date().getFullYear()} Atlantis Immobilier
+        </span>
         <div className="h-px w-20 bg-[linear-gradient(to_right,transparent,var(--champagne),transparent)] opacity-30" />
-        <span className="font-calibri text-[9px] uppercase tracking-[0.3em] text-cream/20">Casablanca, Maroc</span>
+        <span className="font-calibri text-[9px] uppercase tracking-[0.3em] text-cream/20">
+          Casablanca, Maroc
+        </span>
       </div>
     </main>
   );
