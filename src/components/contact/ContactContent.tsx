@@ -388,7 +388,7 @@ export default function ContactContent() {
   };
 
   return (
-    <main className="relative w-screen overflow-x-hidden h-screen flex lg:items-end max-sm:flex-center bg-[#060F0D] font-calibri text-cream">
+    <main className="relative w-screen overflow-x-hidden bg-[#060F0D] font-calibri text-cream">
       <style>{`
         @keyframes kenburns {
           from { transform: scale(1.06); }
@@ -397,7 +397,7 @@ export default function ContactContent() {
       `}</style>
 
       {/* HERO */}
-      <section className="relative flex h-svh min-h-[520px] w-screen items-end overflow-hidden pb-20 sm:pb-24">
+      <section className="relative flex h-screen max-sm:items-center lg:items-end w-screen items-end overflow-hidden pb-20 sm:pb-24">
         <div
           className="absolute inset-0 animate-[kenburns_8s_ease-out_forwards] bg-cover bg-[center_25%]"
           style={{
