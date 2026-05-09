@@ -53,13 +53,13 @@ const INFO_CARDS = [
     icon: "☎",
     title: "Téléphone",
     desc: "Un conseiller vous répond pendant les horaires d'ouverture.",
-    value: "+212 5 XX XX XX XX",
+    value: "+212 6 XX XX XX XX",
   },
   {
     icon: "✉",
     title: "E-mail",
     desc: "Pour toute demande de brochure, visite ou information commerciale.",
-    value: "contact@atlantisimmobilier.ma",
+    value: "atlantisimmobilier.ma",
   },
   {
     icon: "◎",
@@ -388,7 +388,7 @@ export default function ContactContent() {
   };
 
   return (
-    <main className="relative w-screen overflow-x-hidden bg-[#060F0D] font-calibri text-cream">
+    <main className="relative w-screen overflow-x-hidden h-screen flex lg:items-end max-sm:flex-center bg-[#060F0D] font-calibri text-cream">
       <style>{`
         @keyframes kenburns {
           from { transform: scale(1.06); }
@@ -848,9 +848,7 @@ export default function ContactContent() {
                 Casablanca, Maroc
               </p>
 
-              <p className="mt-2 font-calibri text-[10px] italic text-cream/22">
-                Remplacer par un iframe Google Maps
-              </p>
+              
             </div>
           </div>
         </Reveal>
