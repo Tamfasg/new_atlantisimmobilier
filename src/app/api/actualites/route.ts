@@ -5,11 +5,11 @@ import { z } from "zod";
 export const runtime = "nodejs";
 
 const newsletterSchema = z.object({
-  nom: z.string().min(2, "Le nom est obligatoire"),
+  nom: z.string().min(3, "Le nom est obligatoire"),
   email: z.string().email("Email invalide"),
 
-  telephone: z.string().optional().nullable(),
-  sujet: z.string().optional().nullable(),
+  telephone: z.string().min(7),
+  sujet: z.string().nullable(),
 });
 
 export async function POST(req: Request) {

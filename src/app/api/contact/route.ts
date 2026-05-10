@@ -4,12 +4,15 @@ import { z } from "zod";
 
 export const runtime = "nodejs";
 
+
+
+
 const contactSchema = z.object({
-  nom: z.string().min(2),
-  email: z.string().email(),
-  telephone: z.string().min(6),
-  ville: z.string().optional().nullable(),
-  projet: z.string().optional().nullable(),
+  nom: z.string().min(3, "Le nom est obligatoire"),
+  email: z.string().email("Email Invalid"),
+  telephone: z.string().min(7),
+  ville: z.string(),
+  projet: z.string(),
   interet: z.string().optional().nullable(),
   message: z.string().optional().nullable(),
   vousEtes: z.string().optional().nullable(),
