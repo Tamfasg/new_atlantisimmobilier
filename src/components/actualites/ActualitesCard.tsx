@@ -82,7 +82,7 @@ export const ArticleCard = ({
 
   if (variant === "featured") {
     return (
-      <Link href={`/actualites/${article.slug}`} className="group block text-inherit no-underline">
+      <div className="group block text-inherit no-underline">
         <div
           className="stagger-item grid cursor-pointer grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-0 border border-champagne/20 opacity-0 transition-colors duration-[400ms] group-hover:border-champagne/50"
           data-dir="left"
@@ -113,12 +113,12 @@ export const ArticleCard = ({
             </div>
           </div>
         </div>
-      </Link>
+      </div>
     );
   }
 
   return (
-    <Link href={`/actualites/${article.slug}`} className="group block h-full text-inherit no-underline">
+    <div  className="group block h-full text-inherit no-underline">
       <div
         className={cx(
           "stagger-item flex h-full cursor-pointer flex-col border border-emerald-light/20 bg-emerald-luxury opacity-0 transition-colors duration-[400ms] group-hover:bg-emerald-mid",
@@ -145,11 +145,10 @@ export const ArticleCard = ({
           <h3 className="mb-[0.85rem] flex-1 font-georgia text-[clamp(1.05rem,2.8vw,1.3rem)] font-normal italic leading-[1.25] text-cream">{article.title}</h3>
           <Body opacity={0.45} className="mb-[1.2rem] text-[clamp(12px,3vw,14px)]">{article.desc}</Body>
           <div className="mt-auto flex items-center gap-[0.6rem]">
-            <span className={cx("font-calibri text-[10px] font-bold uppercase tracking-[0.28em]", accent.text)}>Lire plus</span>
-            <div className={cx("h-px w-5 opacity-60", accent.line)} />
+            <div className={cx("h-px w-5 opacity-60 group-hover:w-80 transition-all duration-300", accent.line)} />
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };

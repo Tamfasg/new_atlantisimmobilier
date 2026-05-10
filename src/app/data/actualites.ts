@@ -26,7 +26,7 @@ export const ARTICLES = [
     desc: "Un ensemble résidentiel structuré à Had Soualem, pensé pour les familles qui cherchent confort, lumière et sérénité.",
     date: "À publier",
     readTime: "3 min",
-    image: "/assets/projects/OLIVIER/1.jpeg",
+    image: "/assets/projects/SIGNATURE/11.jpg",
   },
   {
     slug: "emplacement-premier-critere-investissement",
@@ -54,7 +54,7 @@ export const ARTICLES = [
     desc: "Visites virtuelles, procuration, suivi de chantier et gestion locative : comment sécuriser son acquisition à distance.",
     date: "À publier",
     readTime: "5 min",
-    image: "/assets/projects/OLIVIER/1.jpeg",
+    image: "/assets/projects/SIGNATURE/15.jpg",
   },
   {
     slug: "trois-marques-une-exigence",
@@ -63,7 +63,7 @@ export const ARTICLES = [
     desc: "Atlantis Signature, Pessac Collection et L'Olivier du Parc répondent à trois parcours immobiliers différents, avec la même rigueur.",
     date: "À publier",
     readTime: "3 min",
-    image: "/assets/projects/SIGNATURE/1.jpg",
+    image: "/assets/projects/SIGNATURE/23.jpg",
   },
 ];
 

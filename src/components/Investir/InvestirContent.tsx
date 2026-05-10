@@ -438,6 +438,12 @@ const InvestirContent = () => {
                 label="Contacter la cellule MRE"
                 color="#2E7D6A"
                 borderColor="rgba(46,125,106,0.6)"
+                onClick={() => {
+                  document.getElementById("invester-contact")?.scrollIntoView({
+                    behavior: "smooth",
+                    block:  "start",
+                  })
+                }}
               />
             </div>
           </div>
@@ -624,7 +630,7 @@ const InvestirContent = () => {
             </div>
 
           </div>
-          <div>
+          <div id="invester-contact">
             <InvestirForm />
           </div>
         </div>

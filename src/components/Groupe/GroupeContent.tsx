@@ -13,9 +13,6 @@ import { BrandJourney, MethodHorizontal, ValueCard } from "./GroupeCard";
 gsap.registerPlugin(ScrollTrigger);
 
 
-/* ─────────────────────────────────────────────
-   ANIMATIONS
-───────────────────────────────────────────── */
 
 function useGroupeAnimations() {
   useEffect(() => {
