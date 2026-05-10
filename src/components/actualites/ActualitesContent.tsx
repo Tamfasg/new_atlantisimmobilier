@@ -312,7 +312,7 @@ const ActualitesPage = () => {
           </Body>
         </div>
 
-        {filteredArticles.length === 0 ? (
+        {filteredArticles.length === 0 && activeCategory ? (
           <div className="border border-emerald-light/20 px-8 py-[clamp(4rem,10vw,7rem)] text-center">
             <p className="mb-4 font-georgia text-[clamp(1.5rem,4vw,2.5rem)] italic text-cream">
               Les actualités arrivent bientôt.
