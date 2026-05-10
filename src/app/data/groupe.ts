@@ -96,7 +96,7 @@ export const BRANDS = [
     city: "Casablanca & littoral",
     emotion: "Élégance, exclusivité",
     image: "/assets/projects/SIGNATURE/4.jpg",
-    href: "/projets#signature",
+    href: "/project#signature",
   },
   {
     name: "Pessac Collection",
@@ -104,7 +104,7 @@ export const BRANDS = [
     city: "Casablanca centre",
     emotion: "Mémoire & élan urbain",
     image: "/assets/projects/PESSAC/2.jpeg",
-    href: "/projets#pessac",
+    href: "/project#pessac",
   },
   {
     name: "L’Olivier du Parc",
@@ -112,7 +112,7 @@ export const BRANDS = [
     city: "Had Soualem",
     emotion: "Sérénité, projection",
     image: "/assets/projects/SIGNATURE/11.jpg",
-    href: "/projets#olivier",
+    href: "/project#olivier",
   },
 ];
 

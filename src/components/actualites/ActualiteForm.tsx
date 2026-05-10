@@ -1,28 +1,25 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-
+import { Body, cx } from "./ActualitesHelper";
 import { Btn } from "./ActualiteBtn";
-import { Body } from "./ActualitesHelper";
-import { cx } from "./ActualitesHelper";
 
-export type NewsFormData = {
-  nom: string;
-  email: string;
-  telephone?: string;
-  sujet?: string;
-};
+const labelClass =
+  "mb-2 block font-calibri text-[9px] uppercase tracking-widest text-cream/35";
 
-const newsFields = [
+const inputClass =
+  "w-full border border-cream/10 bg-transparent px-4 py-3 font-calibri text-[14px] text-cream outline-none transition-colors duration-200 placeholder:text-cream/20 focus:border-champagne/45";
+
+const actualiteFields = [
   {
     key: "nom",
-    label: "Nom",
+    label: "Nom complet",
     type: "text",
     required: true,
   },
   {
     key: "email",
-    label: "E-mail",
+    label: "Email",
     type: "email",
     required: true,
   },
@@ -30,47 +27,63 @@ const newsFields = [
     key: "telephone",
     label: "Téléphone",
     type: "tel",
-    required: false,
+    required: true,
   },
 ] as const;
 
-const sujetOptions = ["Projets", "Investissement", "MRE", "Tous"];
+const sujets = [
+  "Recevoir les actualités",
+  "Suivi des projets",
+  "Conseils d’investissement",
+  "Nouvelle opportunité",
+  "Demande d’information",
+] as const;
+
+type ActualiteFormData = {
+  nom: string;
+  email: string;
+  telephone: string;
+  sujet: string;
+  consent: boolean;
+};
 
 export default function ActualiteForm() {
-  const inputClassName =
-    "box-border w-full border border-emerald-light/30 bg-transparent px-[clamp(0.8rem,2vw,1rem)] py-[clamp(0.65rem,2vw,0.85rem)] font-calibri text-[clamp(13px,3vw,15px)] text-cream outline-none transition-colors duration-200 placeholder:text-cream/25 focus:border-champagne/50";
-
-  const labelClassName =
-    "mb-[7px] block font-calibri text-[10px] font-bold uppercase tracking-[0.35em] text-cream/30";
-
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting, isSubmitSuccessful },
-  } = useForm<NewsFormData>({
+  } = useForm<ActualiteFormData>({
     defaultValues: {
       nom: "",
       email: "",
       telephone: "",
-      sujet: "",
+      sujet: "Recevoir les actualités",
+      consent: false,
     },
   });
 
-  const onSubmit = async (data: NewsFormData) => {
+  const onSubmit = async (data: ActualiteFormData) => {
     const res = await fetch("/api/actualites", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        type: "actualites",
+        nom: data.nom,
+        email: data.email,
+        telephone: data.telephone,
+        sujet: data.sujet,
+        projet: data.sujet || "Actualites",
+      }),
     });
 
     const result = await res.json();
 
     if (!res.ok) {
       console.error(result);
-      throw new Error(result.error || "Erreur lors de l'inscription");
+      throw new Error(result.error || "Erreur lors de l'envoi");
     }
 
     reset();
@@ -78,25 +91,25 @@ export default function ActualiteForm() {
 
   if (isSubmitSuccessful) {
     return (
-      <div className="reveal-right border border-champagne/25 bg-champagne/[0.04] p-[clamp(2rem,5vw,3rem)] text-center opacity-0">
+      <div className="border border-champagne/25 bg-champagne/[0.04] p-[clamp(2rem,5vw,3rem)] text-center">
         <p className="mb-4 font-georgia text-[clamp(2rem,5vw,2.5rem)] italic text-champagne">
           Merci.
         </p>
 
         <Body opacity={0.55}>
-          Votre inscription a bien été prise en compte. Vous recevrez nos
-          prochaines actualités en avant-première.
+          Votre inscription a bien été transmise. Vous recevrez les prochaines
+          actualités Atlantis Immobilier.
         </Body>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="reveal-right opacity-0">
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-[clamp(0.8rem,2vw,1rem)] grid grid-cols-[repeat(auto-fit,minmax(min(100%,160px),1fr))] gap-[clamp(0.8rem,2vw,1rem)]">
-        {newsFields.map((field) => (
+        {actualiteFields.map((field) => (
           <div key={field.key}>
-            <label className={labelClassName}>{field.label}</label>
+            <label className={labelClass}>{field.label}</label>
 
             <input
               type={field.type}
@@ -106,7 +119,7 @@ export default function ActualiteForm() {
                   ? `${field.label} est obligatoire`
                   : false,
               })}
-              className={inputClassName}
+              className={inputClass}
             />
 
             {errors[field.key] && (
@@ -116,40 +129,65 @@ export default function ActualiteForm() {
             )}
           </div>
         ))}
-
-        <div>
-          <label className={labelClassName}>Sujet d&apos;intérêt</label>
-
-          <select
-            {...register("sujet")}
-            className={cx(inputClassName, "text-cream/60")}
-          >
-            <option value="" className="bg-emerald-luxury text-cream">
-              Sélectionner
-            </option>
-
-            {sujetOptions.map((option) => (
-              <option
-                key={option}
-                value={option}
-                className="bg-emerald-luxury text-cream"
-              >
-                {option}
-              </option>
-            ))}
-          </select>
-        </div>
       </div>
 
+      <div className="mb-[clamp(0.8rem,2vw,1rem)]">
+        <label className={labelClass}>Sujet</label>
+
+        <select
+          {...register("sujet", {
+            required: "Le sujet est obligatoire",
+          })}
+          className={cx(inputClass, "bg-emerald-deep text-cream/65")}
+        >
+          {sujets.map((sujet) => (
+            <option key={sujet} value={sujet} className="bg-emerald-deep text-cream">
+              {sujet}
+            </option>
+          ))}
+        </select>
+
+        {errors.sujet && (
+          <p className="mt-1 font-calibri text-[9px] uppercase tracking-widest text-red-400/70">
+            {errors.sujet.message}
+          </p>
+        )}
+      </div>
+
+      <div className="mb-[clamp(1.2rem,3vw,1.5rem)] flex items-start gap-3.5">
+        <input
+          type="checkbox"
+          id="actualites-consent"
+          {...register("consent", {
+            required: "Vous devez accepter le traitement des données",
+          })}
+          className="mt-[3px] h-4 w-4 shrink-0 accent-champagne"
+        />
+
+        <label
+          htmlFor="actualites-consent"
+          className="cursor-pointer font-calibri text-[clamp(11px,2.5vw,12px)] leading-[1.6] text-cream/40"
+        >
+          J’accepte que mes données soient utilisées pour recevoir les actualités
+          et être contacté par Atlantis Immobilier.
+        </label>
+      </div>
+
+      {errors.consent && (
+        <p className="-mt-3 mb-4 font-calibri text-[9px] uppercase tracking-widest text-red-400/70">
+          {errors.consent.message}
+        </p>
+      )}
+
       <Btn
-        label={isSubmitting ? "Inscription..." : "S'inscrire aux actualités"}
+        label={isSubmitting ? "Envoi..." : "Recevoir les actualités"}
         type="submit"
         full
       />
 
-      <p className="mt-4 font-calibri text-[11px] leading-[1.65] text-cream/[0.22]">
-        Vos données sont traitées dans le strict respect de la loi 09-08
-        relative à la protection des données personnelles.
+      <p className="mt-4 font-calibri text-[11px] leading-[1.7] text-cream/25">
+        Vos données sont utilisées uniquement pour traiter votre demande et vous
+        transmettre les informations liées aux actualités Atlantis Immobilier.
       </p>
     </form>
   );

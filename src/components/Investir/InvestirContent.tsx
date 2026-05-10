@@ -305,13 +305,7 @@ const InvestirContent = () => {
                 Nous vous aidons à faire ce choix avec la bonne perspective.
               </Body>
             </div>
-            <div className="reveal-left opacity-0">
-              <Btn
-                label="Échanger avec un conseiller acquéreur"
-                color="#C9A96E"
-                borderColor="rgba(201,169,110,0.6)"
-              />
-            </div>
+            
           </div>
 
           <div>
@@ -375,9 +369,7 @@ const InvestirContent = () => {
                 <Body opacity={0.55}>{item}</Body>
               </div>
             ))}
-            <div className="reveal-left mt-[clamp(1.5rem,4vw,2.5rem)] opacity-0">
-              <Btn label="Échanger avec un conseiller patrimonial" />
-            </div>
+            
           </div>
 
           <div>
@@ -434,17 +426,7 @@ const InvestirContent = () => {
                 La distance ne doit pas être un obstacle à un investissement
                 juste.
               </Body>
-              <Btn
-                label="Contacter la cellule MRE"
-                color="#2E7D6A"
-                borderColor="rgba(46,125,106,0.6)"
-                onClick={() => {
-                  document.getElementById("invester-contact")?.scrollIntoView({
-                    behavior: "smooth",
-                    block:  "start",
-                  })
-                }}
-              />
+              
             </div>
           </div>
 
@@ -568,7 +550,6 @@ const InvestirContent = () => {
                 équipe vous oriente vers les solutions les mieux adaptées à
                 votre profil.
               </Body>
-              <Btn label="Simuler mon financement" />
             </div>
           </div>
 
@@ -614,7 +595,7 @@ const InvestirContent = () => {
 
       <EmeraldRule />
 
-      <section className={cx(sectionClass, "bg-[#0B2B26]")}>
+      <section className={cx(sectionClass, "bg-[#0B2B26]")} id="contact">
         <div className={twoColumnClass}>
           <div>
             <div className="reveal-left opacity-0">

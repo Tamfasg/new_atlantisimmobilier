@@ -21,5 +21,6 @@ export const M = {
   ul:      motion.ul,
   img:  motion.create(Image),
   image: motion.img,
+  article: motion.article,
 
 }
