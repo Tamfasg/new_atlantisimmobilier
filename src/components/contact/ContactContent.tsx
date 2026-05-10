@@ -64,12 +64,14 @@ const INFO_CARDS = [
   },
 ] as const;
 
-const PROFILE_OPTIONS = ["Particulier", "Investisseur", "Professionnel", "MRE"] as const;
-
-const CITY_OPTIONS = [
-  "Casablanca",
-  "Had Soualem",
+const PROFILE_OPTIONS = [
+  "Particulier",
+  "Investisseur",
+  "Professionnel",
+  "MRE",
 ] as const;
+
+const CITY_OPTIONS = ["Casablanca", "Had Soualem"] as const;
 
 const PROJECT_OPTIONS = [
   "Résidence principale",
@@ -130,9 +132,7 @@ async function submitContact(data: ContactPageFormData) {
 
   if (!res.ok) {
     throw new Error(
-      typeof json?.error === "string"
-        ? json.error
-        : "Erreur lors de l'envoi",
+      typeof json?.error === "string" ? json.error : "Erreur lors de l'envoi",
     );
   }
 
@@ -265,12 +265,38 @@ function GeoRings({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 200 200" fill="none" className={className} aria-hidden>
       <circle cx="100" cy="100" r="95" stroke="currentColor" strokeWidth="1" />
-      <circle cx="100" cy="100" r="72" stroke="currentColor" strokeWidth="0.6" />
-      <circle cx="100" cy="100" r="50" stroke="currentColor" strokeWidth="0.6" />
+      <circle
+        cx="100"
+        cy="100"
+        r="72"
+        stroke="currentColor"
+        strokeWidth="0.6"
+      />
+      <circle
+        cx="100"
+        cy="100"
+        r="50"
+        stroke="currentColor"
+        strokeWidth="0.6"
+      />
       <circle cx="100" cy="100" r="28" stroke="currentColor" strokeWidth="1" />
       <circle cx="100" cy="100" r="5" fill="currentColor" />
-      <line x1="5" y1="100" x2="195" y2="100" stroke="currentColor" strokeWidth="0.4" />
-      <line x1="100" y1="5" x2="100" y2="195" stroke="currentColor" strokeWidth="0.4" />
+      <line
+        x1="5"
+        y1="100"
+        x2="195"
+        y2="100"
+        stroke="currentColor"
+        strokeWidth="0.4"
+      />
+      <line
+        x1="100"
+        y1="5"
+        x2="100"
+        y2="195"
+        stroke="currentColor"
+        strokeWidth="0.4"
+      />
     </svg>
   );
 }
@@ -281,10 +307,18 @@ function Brackets({ color = "gold" }: { color?: "gold" | "emerald" }) {
 
   return (
     <>
-      <span className={`absolute left-2.5 top-2.5 size-4 border-l border-t ${borderColor}`} />
-      <span className={`absolute right-2.5 top-2.5 size-4 border-r border-t ${borderColor}`} />
-      <span className={`absolute bottom-2.5 left-2.5 size-4 border-b border-l ${borderColor}`} />
-      <span className={`absolute bottom-2.5 right-2.5 size-4 border-b border-r ${borderColor}`} />
+      <span
+        className={`absolute left-2.5 top-2.5 size-4 border-l border-t ${borderColor}`}
+      />
+      <span
+        className={`absolute right-2.5 top-2.5 size-4 border-r border-t ${borderColor}`}
+      />
+      <span
+        className={`absolute bottom-2.5 left-2.5 size-4 border-b border-l ${borderColor}`}
+      />
+      <span
+        className={`absolute bottom-2.5 right-2.5 size-4 border-b border-r ${borderColor}`}
+      />
     </>
   );
 }
@@ -521,9 +555,9 @@ export default function ContactContent() {
               </h2>
 
               <p className="font-calibri text-[clamp(14px,3.5vw,16px)] leading-[1.85] text-cream/45">
-                Remplissez le formulaire ci-dessous. Votre demande sera transmise
-                à l&apos;équipe concernée selon votre projet, votre profil et la
-                marque qui vous intéresse.
+                Remplissez le formulaire ci-dessous. Votre demande sera
+                transmise à l&apos;équipe concernée selon votre projet, votre
+                profil et la marque qui vous intéresse.
               </p>
             </Reveal>
 
@@ -742,9 +776,7 @@ export default function ContactContent() {
                       disabled={isSubmitting}
                       className="w-full border border-gold-muted/65 py-4 font-calibri text-[12px] font-bold uppercase tracking-[0.3em] text-gold-muted transition-all duration-300 hover:bg-gold-muted hover:text-[#060F0D] hover:shadow-[0_8px_28px_rgba(201,169,110,0.25)] disabled:cursor-not-allowed disabled:opacity-50"
                     >
-                      {isSubmitting
-                        ? "Envoi en cours…"
-                        : "Envoyer ma demande"}
+                      {isSubmitting ? "Envoi en cours…" : "Envoyer ma demande"}
                     </button>
 
                     <p className="font-calibri text-[11px] leading-[1.65] text-cream/22">
@@ -848,26 +880,44 @@ export default function ContactContent() {
           </p>
         </Reveal>
 
-        <Reveal dir="up">
-          <div className="relative flex h-64 w-full items-center justify-center overflow-hidden border border-[#2E7D6A]/30 bg-[#060F0D]/80 sm:h-80 lg:h-[420px]">
-            <div className="pointer-events-none absolute inset-0 [background-image:linear-gradient(rgba(46,125,106,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(46,125,106,0.1)_1px,transparent_1px)] [background-size:60px_60px]" />
-            <div className="pointer-events-none absolute inset-0 [background-image:linear-gradient(rgba(46,125,106,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(46,125,106,0.04)_1px,transparent_1px)] [background-size:12px_12px]" />
+       <Reveal dir="up">
+  <a
+    href="https://www.google.com/maps/search/?api=1&query=33.569600,-7.623700"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Ouvrir Atlantis Immobilier sur Google Maps"
+    className="group relative block overflow-hidden border border-[#2E7D6A]/30 bg-[#060F0D]/80"
+  >
+    <div className="relative h-64 w-full sm:h-80 lg:h-[420px]">
+      <iframe
+        title="Atlantis Immobilier Map"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=-7.6262%2C33.5679%2C-7.6212%2C33.5713&layer=mapnik&marker=33.569600%2C-7.623700"
+        loading="lazy"
+        className="pointer-events-none h-full w-full grayscale-[0.25] contrast-[1.08] transition-transform duration-700 group-hover:scale-[1.03]"
+        style={{ border: 0 }}
+      />
 
-            <div className="relative text-center">
-              <div className="mx-auto mb-4 flex size-12 items-center justify-center rounded-full border border-gold-muted/50 bg-gold-muted/8 text-xl text-gold-muted">
-                ◎
-              </div>
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(6,15,13,0.65)_0%,transparent_45%,rgba(6,15,13,0.2)_100%)]" />
 
-              <p className="font-georgia text-lg italic text-cream">
-                Atlantis Immobilier
-              </p>
+      <div className="pointer-events-none absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-full flex-col items-center">
+      </div>
 
-              <p className="mt-1 font-calibri text-[11px] uppercase tracking-[0.25em] text-cream/40">
-                Casablanca, Maroc
-              </p>
-            </div>
-          </div>
-        </Reveal>
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-[#060F0D] via-[#060F0D]/85 to-transparent px-6 pb-6 pt-20">
+        <p className="font-georgia text-lg italic text-cream">
+          Atlantis Immobilier
+        </p>
+
+        <p className="mt-1 font-calibri text-[11px] uppercase tracking-[0.25em] text-cream/40">
+          Casablanca, Maroc
+        </p>
+
+        <p className="mt-3 font-calibri text-[10px] font-bold uppercase tracking-[0.28em] text-gold-muted/80">
+          Cliquer pour ouvrir dans Google Maps
+        </p>
+      </div>
+    </div>
+  </a>
+</Reveal>
       </section>
 
       <div className="h-px bg-gradient-to-r from-transparent via-gold-muted/40 to-transparent" />
