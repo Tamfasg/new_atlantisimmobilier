@@ -69,3 +69,15 @@ model ActualitesLead {
 
   createdAt DateTime @default(now())
 }
+
+
+
+model AdminSecretKey {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  value     String
+  preview   String
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

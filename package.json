@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && prisma migrate deploy && next build",
+    "admin:key": "tsx src/lib/randomKey.ts",
     "start": "next start",
     "lint": "next lint"
   },

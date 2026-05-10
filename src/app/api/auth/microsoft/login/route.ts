@@ -7,7 +7,7 @@ export const runtime = "nodejs";
 export async function GET(req: NextRequest) {
   const key = req.nextUrl.searchParams.get("key");
 
-  if (key !== process.env.MICROSOFT_ADMIN_CONNECT_KEY) {
+  if (!key || key !== process.env.MICROSOFT_ADMIN_CONNECT_KEY) {
     return NextResponse.json(
       { success: false, error: "Unauthorized" },
       { status: 401 },
