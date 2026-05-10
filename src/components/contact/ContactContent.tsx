@@ -69,12 +69,6 @@ const PROFILE_OPTIONS = ["Particulier", "Investisseur", "Professionnel", "MRE"] 
 const CITY_OPTIONS = [
   "Casablanca",
   "Had Soualem",
-  "Rabat",
-  "Marrakech",
-  "Tanger",
-  "Agadir",
-  "Fès",
-  "Autre",
 ] as const;
 
 const PROJECT_OPTIONS = [
@@ -90,9 +84,6 @@ const INTEREST_OPTIONS = [
   "Atlantis Signature",
   "Pessac Collection",
   "L'Olivier du Parc",
-  "Casablanca",
-  "Had Soualem",
-  "Littoral",
 ] as const;
 
 // ─────────────────────────────────────────────────────────────────────────────
