@@ -56,12 +56,6 @@ const INFO_CARDS = [
     value: "+212 608-081155 | +212 608808044",
   },
   {
-    icon: "✉",
-    title: "E-mail",
-    desc: "Pour toute demande de brochure, visite ou information commerciale.",
-    value: "atlantisimmobilier.ma",
-  },
-  {
     icon: "◎",
     title: "Adresse",
     desc: "Atlantis Immobilier — Casablanca, Maroc.",
