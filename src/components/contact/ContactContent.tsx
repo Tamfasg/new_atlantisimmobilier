@@ -53,7 +53,7 @@ const INFO_CARDS = [
     icon: "☎",
     title: "Téléphone",
     desc: "Un conseiller vous répond pendant les horaires d'ouverture.",
-    value: "+212 6 XX XX XX XX",
+    value: "+212 608-081155 | +212 608808044",
   },
   {
     icon: "✉",
@@ -766,7 +766,7 @@ export default function ContactContent() {
             </p>
 
             <a
-              href="https://wa.me/212XXXXXXXXX"
+              href="https://api.whatsapp.com/send/?phone=212608081155&text&type=phone_number&app_absent=0"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 border border-[#2E7D6A]/65 px-6 py-3.5 font-calibri text-[11px] font-bold uppercase tracking-[0.3em] text-[#2E7D6A] transition-all duration-300 hover:bg-[#2E7D6A] hover:text-[#060F0D] sm:text-[12px]"
