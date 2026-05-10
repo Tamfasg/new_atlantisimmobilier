@@ -14,6 +14,7 @@ const contactSchema = z.object({
   nom: z.string().min(2, "Nom requis"),
   telephone: z.string().min(8, "Numéro requis"),
   email: z.string().email("E-mail invalide"),
+  ville: z.string().min(1, "Ville requise"),
   vousEtes: z.string().min(1, "Champ requis"),
   projet: z.string().min(1, "Champ requis"),
   interet: z.string().optional().nullable(),
@@ -46,7 +47,7 @@ const FAQS = [
     q: "Mes données sont-elles protégées ?",
     a: "Oui. Vos données sont traitées conformément à la loi 09-08 relative à la protection des données personnelles.",
   },
-];
+] as const;
 
 const INFO_CARDS = [
   {
@@ -61,9 +62,20 @@ const INFO_CARDS = [
     desc: "Atlantis Immobilier — Casablanca, Maroc.",
     value: "Adresse du siège à ajouter",
   },
-];
+] as const;
 
-const PROFILE_OPTIONS = ["Particulier", "Investisseur", "Professionnel", "MRE"];
+const PROFILE_OPTIONS = ["Particulier", "Investisseur", "Professionnel", "MRE"] as const;
+
+const CITY_OPTIONS = [
+  "Casablanca",
+  "Had Soualem",
+  "Rabat",
+  "Marrakech",
+  "Tanger",
+  "Agadir",
+  "Fès",
+  "Autre",
+] as const;
 
 const PROJECT_OPTIONS = [
   "Résidence principale",
@@ -72,7 +84,7 @@ const PROJECT_OPTIONS = [
   "Demande de brochure",
   "Demande de visite",
   "Autre",
-];
+] as const;
 
 const INTEREST_OPTIONS = [
   "Atlantis Signature",
@@ -81,7 +93,7 @@ const INTEREST_OPTIONS = [
   "Casablanca",
   "Had Soualem",
   "Littoral",
-];
+] as const;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Classes
@@ -107,6 +119,7 @@ async function submitContact(data: ContactPageFormData) {
     nom: data.nom,
     email: data.email,
     telephone: data.telephone,
+    ville: data.ville,
     vousEtes: data.vousEtes,
     projet: data.projet,
     interet: data.interet || null,
@@ -357,6 +370,7 @@ export default function ContactContent() {
       nom: "",
       telephone: "",
       email: "",
+      ville: "",
       vousEtes: "",
       projet: "",
       interet: "",
@@ -391,7 +405,7 @@ export default function ContactContent() {
       `}</style>
 
       {/* HERO */}
-      <section className="relative flex h-screen max-sm:items-center lg:items-end w-screen items-end overflow-hidden pb-20 sm:pb-24">
+      <section className="relative flex h-screen w-screen items-end overflow-hidden pb-20 max-sm:items-center sm:pb-24 lg:items-end">
         <div
           className="absolute inset-0 animate-[kenburns_8s_ease-out_forwards] bg-cover bg-[center_25%]"
           style={{
@@ -517,7 +531,7 @@ export default function ContactContent() {
 
               <p className="font-calibri text-[clamp(14px,3.5vw,16px)] leading-[1.85] text-cream/45">
                 Remplissez le formulaire ci-dessous. Votre demande sera transmise
-                à l'équipe concernée selon votre projet, votre profil et la
+                à l&apos;équipe concernée selon votre projet, votre profil et la
                 marque qui vous intéresse.
               </p>
             </Reveal>
@@ -602,15 +616,34 @@ export default function ContactContent() {
                       </div>
                     </div>
 
-                    <div>
-                      <label className={labelCls}>E-mail</label>
-                      <input
-                        {...register("email")}
-                        type="email"
-                        placeholder="votre@email.com"
-                        className={inputCls}
-                      />
-                      <FormError message={errors.email?.message} />
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <div>
+                        <label className={labelCls}>E-mail</label>
+                        <input
+                          {...register("email")}
+                          type="email"
+                          placeholder="votre@email.com"
+                          className={inputCls}
+                        />
+                        <FormError message={errors.email?.message} />
+                      </div>
+
+                      <div>
+                        <label className={labelCls}>Ville</label>
+                        <select
+                          {...register("ville")}
+                          className={`${inputCls} text-cream/65`}
+                        >
+                          <option value="">Sélectionner</option>
+
+                          {CITY_OPTIONS.map((option) => (
+                            <option key={option} value={option}>
+                              {option}
+                            </option>
+                          ))}
+                        </select>
+                        <FormError message={errors.ville?.message} />
+                      </div>
                     </div>
 
                     <div className="grid gap-4 sm:grid-cols-2">
@@ -651,7 +684,7 @@ export default function ContactContent() {
 
                     <div>
                       <label className={labelCls}>
-                        Marque ou ville d'intérêt
+                        Marque ou ville d&apos;intérêt
                       </label>
 
                       <select
@@ -691,8 +724,8 @@ export default function ContactContent() {
                         htmlFor="consent"
                         className="cursor-pointer font-calibri text-[11px] leading-[1.65] text-cream/38"
                       >
-                        J'accepte que mes données soient utilisées pour traiter
-                        ma demande, conformément à la loi 09-08.
+                        J&apos;accepte que mes données soient utilisées pour
+                        traiter ma demande, conformément à la loi 09-08.
                       </label>
                     </div>
 
@@ -841,8 +874,6 @@ export default function ContactContent() {
               <p className="mt-1 font-calibri text-[11px] uppercase tracking-[0.25em] text-cream/40">
                 Casablanca, Maroc
               </p>
-
-              
             </div>
           </div>
         </Reveal>
