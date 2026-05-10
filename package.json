@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@azure/msal-node": "^5.2.0",
     "@gsap/react": "^2.1.2",
     "@hookform/resolvers": "^5.2.2",
     "@microsoft/microsoft-graph-client": "^3.0.7",

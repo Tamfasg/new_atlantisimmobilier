@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { getMicrosoftAccessToken } from "@/lib/microsoft/getAccessToken";
 
 type LeadType = "contact" | "investir" | "project" | "actualites";
 
@@ -47,8 +48,8 @@ function requireEnv(name: string) {
   return value;
 }
 
-function getAccessToken() {
-  return requireEnv("MICROSOFT_GRAPH_ACCESS_TOKEN");
+async function getAccessToken() {
+  return getMicrosoftAccessToken();
 }
 
 function escapeHtml(value: unknown) {
@@ -116,7 +117,7 @@ function getSafeText(value?: string | null) {
 }
 
 async function graphFetch<T>(path: string, init?: RequestInit): Promise<T> {
-  const token = getAccessToken();
+  const token = await getAccessToken();
 
   const res = await fetch(`${GRAPH_BASE_URL}${path}`, {
     ...init,
@@ -128,7 +129,14 @@ async function graphFetch<T>(path: string, init?: RequestInit): Promise<T> {
   });
 
   const text = await res.text();
-  const json = text ? JSON.parse(text) : null;
+
+  let json: unknown = null;
+
+  try {
+    json = text ? JSON.parse(text) : null;
+  } catch {
+    json = text;
+  }
 
   if (!res.ok) {
     throw new Error(
@@ -138,7 +146,6 @@ async function graphFetch<T>(path: string, init?: RequestInit): Promise<T> {
 
   return json as T;
 }
-
 function buildAdminLeadHtml(lead: LeadWorkflowInput) {
   const rows = [
     ["Dossier", getFolderLabel(lead)],
