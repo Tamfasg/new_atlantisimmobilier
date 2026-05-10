@@ -531,7 +531,7 @@ export default function ContactContent() {
                     </span>
 
                     <div>
-                      <p className="mb-1 font-calibri text-[10px] font-bold uppercase tracking-[0.3em] text-gold-muted/70">
+                      <p className="mb-1 font-calibri text-lg font-bold uppercase tracking-[0.3em] text-gold-muted/70">
                         {card.title}
                       </p>
 
@@ -539,7 +539,7 @@ export default function ContactContent() {
                         {card.desc}
                       </p>
 
-                      <p className="font-georgia text-base italic text-cream">
+                      <p className="font-calibri text-base text-cream">
                         {card.value}
                       </p>
                     </div>
