@@ -354,7 +354,7 @@ const ProjectContent = () => {
         </div>
       </Reveal>
 
-      <Reveal as="section" className="px-10 py-24 md:px-20">
+      <Reveal className="px-10 py-24 md:px-20">
         <SectionTag>Programmes en cours de commercialisation</SectionTag>
 
         <h2
