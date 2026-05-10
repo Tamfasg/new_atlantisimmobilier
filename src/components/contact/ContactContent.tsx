@@ -16,8 +16,8 @@ const contactSchema = z.object({
   email: z.string().email("E-mail invalide"),
   vousEtes: z.string().min(1, "Champ requis"),
   projet: z.string().min(1, "Champ requis"),
-  interet: z.string().optional(),
-  message: z.string().optional(),
+  interet: z.string().optional().nullable(),
+  message: z.string().optional().nullable(),
   consent: z.boolean().refine((value) => value === true, {
     message: "Consentement requis",
   }),
