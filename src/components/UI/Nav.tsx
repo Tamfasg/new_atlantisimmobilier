@@ -261,7 +261,7 @@ const Nav = () => {
         key={`desktop-nav-${pathname}`}
         variants={desktopNavVariants}
         initial="visible"
-        className="fixed left-[15%] -top-1 z-50  w-[70%] select-none font-calibri lg:block nav-gpu bg-white-soft/10 max-sm:hidden sm:hidden rounded-b-4xl backdrop-blur-2xl"
+        className="fixed left-[10%] -top-1 z-50  w-[80%] select-none font-calibri lg:block nav-gpu bg-white-soft/10 max-sm:hidden sm:hidden rounded-b-4xl backdrop-blur-2xl"
       >
         <div className="mx-auto flex h-24 w-full max-w-[92rem] items-center justify-between px-10">
           <M.div variants={desktopItemVariants}>
